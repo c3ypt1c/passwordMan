@@ -1,0 +1,8 @@
+Steps:
+
+Initial:
+1.> Get password and hash it. Hahses are meant to be one way forms of data, essentailly a key.((1))
+2.> ALWAYS times the text BEFORE saving!!!
+3.> ALWAYS half by the hash BEFORE opening!!!
+
+That's all.. secure password should help you keep secure... 
