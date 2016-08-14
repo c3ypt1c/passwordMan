@@ -11,9 +11,6 @@ class sets():
 
 class pa():
     def textToCryArr(text, hashAsInt):      #Saves a hash ready for save
-    ##    if type(text) == type(""):          #JUST A CATCH! #Really needed?
-    ##        text = text.encode(settings.encoding)
-    ##        """Just remember that you won't get a nice string output from cryArrToText"""
         return [ hex(int(x*hashAsInt)) for x in list(text) ] #Wonderful :3
         
     def cryArrToText(cryArr, hashAsInt):
@@ -53,9 +50,10 @@ class IO():
 class menu():
     def menu():
         return """
-1. Add a password
+1. View passwords (check your back)
 2. Generate a password and add it
-3. Exit
+3. Add a password manually
+4. Exit
 """
 
     def pasGen():
@@ -63,8 +61,12 @@ class menu():
 1. Default (16 chars, random)
 2. Choose lengh
 """
+
+
+    
     def c(arrow):
         return str ( input ( arrow ) )
+
 #remember eval()
 
 ##Loading
@@ -74,7 +76,7 @@ try:
 except:
     data = b""
 
-encPass = [] #[Passwords] Passwords = [byte, byte, byte]
+encPass = [] #[Passwords] Passwords = [byte, byte, bytem... [site and info]]
 
 ##/
 
@@ -87,35 +89,67 @@ while True:
             pass
         elif c == "2": #Generate a password and add it.
             while True:
-                print ( menu.pasGen() )
-                c = menu.c(sets.cArrow)
-                if c == "" or c == "1":
-                    p = pa.genStrongPass()
-                    l = 16
-                    break
-                elif c == "2":
-                    print ( "How long?" )
-                    l = int ( menu.c(sets.cArrow) )
-                    p = pa.genStrongPass(l)
-                    break
-                else:
-                    print ( "What?" )
-            try:
-                while True:
-                    print ( p )
-                    print ( "Happy? 1/0?" )
-                    c = menu.c(sets.cArrow)
-                    if c == "0" or c == "":
-                        p = pa.genStrongPass(l)
-                    elif c == "1":
+                try:
+                    while True:
+                        print ( menu.pasGen() )
+                        c = menu.c(sets.cArrow)
+                        if c == "" or c == "1":
+                            p = pa.genStrongPass()
+                            l = 16
+                            break
+                        elif c == "2":
+                            print ( "How long?" )
+                            l = int ( menu.c(sets.cArrow) )
+                            p = pa.genStrongPass(l)
+                            break
+                        else:
+                            print ( "What?" )
+                            
+                    try:
+                        while True:
+                            print ( p )
+                            
+                            print ( "Happy? Y/N?" )
+                            c = menu.c(sets.cArrow).lower()
+                            if c == "n" or c == "":
+                                p = pa.genStrongPass(l)
+                            elif c == "y":
+                                break
+                            else:
+                                print ( "What?" )
+                                
+                    except KeyboardInterrupt:
+                        pass
+                    if c == "y":
+                        while True:
+                            print ( "Add a comment to the password: ", p )
+                            try:
+                                c = menu.c(sets.cArrow)
+                                if c == "":
+                                    print ( "Are you sure you want to leave that blank?" )
+                                    c = menu.c(sets.cArrow).lower()
+                                    if c == "y":
+                                        c = ""
+                                        break
+                                    elif c == "n" or c == "":
+                                        pass
+                                    else:
+                                        print ( "What?" )
+                                else:
+                                    break
+                                
+                            except KeyboardInterrupt:
+                                pass
+                            
                         break
-                    else:
-                        print ( "What?" )
-            except KeyboardInterrupt:
-                pass
+                except KeyboardInterrupt:
+                    pass
+
+        elif c == "3":
+            #Some stuff here
+            pass
             
-            
-        elif c == "3": #Exit
+        elif c == "4": #Exit
             break
         else:
             print ( "What?" )
