@@ -36,7 +36,7 @@ class pa():
 class IO():
     def fread(file):
         f = open(file, "rb")
-        ff = f.read()   #Name in context :3
+        ff = f.read()
         f.close()
         del f
         return ff
@@ -140,7 +140,8 @@ while True:
                                 
                             except KeyboardInterrupt:
                                 pass
-                            
+
+                        encPass.append([pa.textToCryArr(p.encode(sets.encoding),hhh),c])    
                         break
                 except KeyboardInterrupt:
                     pass
