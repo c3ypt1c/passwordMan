@@ -1,20 +1,21 @@
-import hashlib, random
+import hashlib, random;
 
-h = hashlib.new("SHA512", b"passwrod")
-hh = h.hexdigest()
-hhh = int ( hh, 16 )
+##Test program constants.
+h = hashlib.new("SHA512", b"passwrod");
+hh = h.hexdigest();
+hhh = int ( hh, 16 );
 
 class sets():
-    encoding = "UTF-32"
-    fileName = "passwords"
-    cArrow = "> "
+    encoding = "UTF-32";
+    fileName = "passwords";
+    cArrow = "> ";
 
 class pa():
     def textToCryArr(text, hashAsInt):      #Saves a hash ready for save
-        return [ hex(int(x*hashAsInt)) for x in list(text) ] #Wonderful :3
+        return [ hex(int(x*hashAsInt)) for x in list(text) ]; #Wonderful :3
         
     def cryArrToText(cryArr, hashAsInt):
-        return bytes([ int ( int( x, 16 ) / hashAsInt ) for x in cryArr ]) #Much coding skill
+        return bytes([ int ( int( x, 16 ) / hashAsInt ) for x in cryArr ]); #Much coding skill
 
     def genStrongPass(lengh=16,
             charRange={
@@ -22,31 +23,31 @@ class pa():
             43:"!",45:"£",46:"$",47:"%",48:"^",49:"&",50:"*",51:"(",52:")",53:"-",54:"_",55:"=",56:"+",57:"[",58:"]",59:";",60:":",62:"@",63:"#",64:"~",65:"{",66:"}",
             67:"0",68:"1",69:"2",70:"3",71:"4",72:"5",73:"6",74:"7",75:"8",76:"9"}):
 
-        pas = ""
+        pas = "";
         for x in range(lengh):
             while True:
                 try:
-                    hhh = charRange[random.randrange(100)]  #Would this really post a security threat?
-                    break
-                except: pass #Badly coded for a reason. (takes longer to gen)
-            pas = str ( pas ) + str ( hhh )
+                    hhh = charRange[random.randrange(100)];  #Would this really post a security threat?
+                    break;
+                except: pass; #Badly coded for a reason. (takes longer to gen)
 
-        return pas
+        return str ( pas ) + str ( hhh );
 
 class IO():
     def fread(file):
-        f = open(file, "rb")
-        ff = f.read()
-        f.close()
-        del f
-        return ff
+        f = open(file, "rb");
+        ff = f.read();
+        f.close();
+        del f;
+        return ff;
 
     def fright(file, dataAsB):   #See what I did there?
-        f = open(file, "wb")
-        f.write(dataAsB)
-        f.close()
-        del f
-        return True
+        f = open(file, "wb");
+        f.write(dataAsB);
+        f.close();
+        del f;
+        return True;
+                      
 class menu():
     def menu():
         return """
@@ -54,107 +55,103 @@ class menu():
 2. Generate a password and add it
 3. Add a password manually
 4. Exit
-"""
+""";
 
     def pasGen():
         return """
 1. Default (16 chars, random)
 2. Choose lengh
-"""
-
-
+""";
     
     def c(arrow):
-        return str ( input ( arrow ) )
+        return str ( input ( arrow ) );
 
 #remember eval()
 
 ##Loading
 
 try:
-    data = fread(sets.fileName)
+    data = fread(sets.fileName);
 except:
-    data = b""
+    data = b"";
 
-encPass = [] #[Passwords] Passwords = [byte, byte, bytem... [site and info]]
-
-##/
+encPass = []; #[Passwords] Passwords = [byte, byte, byte... [site and info]]
 
 while True:
-    print ( menu.menu() )
-    c = menu.c(sets.cArrow)
+    print ( menu.menu() );
+    c = menu.c(sets.cArrow);
     try:
         if   c == "1": #Add a password
             ##addAPassword()
-            pass
+            pass;
         elif c == "2": #Generate a password and add it.
             while True:
                 try:
                     while True:
-                        print ( menu.pasGen() )
-                        c = menu.c(sets.cArrow)
+                        print ( menu.pasGen() );
+                        c = menu.c(sets.cArrow);
                         if c == "" or c == "1":
-                            p = pa.genStrongPass()
-                            l = 16
-                            break
+                            p = pa.genStrongPass();
+                            l = 16;
+                            break;
                         elif c == "2":
-                            print ( "How long?" )
-                            l = int ( menu.c(sets.cArrow) )
-                            p = pa.genStrongPass(l)
-                            break
+                            print ( "How long?" );
+                            l = int ( menu.c(sets.cArrow) );
+                            p = pa.genStrongPass(l);
+                            break;
                         else:
-                            print ( "What?" )
+                            print ( "What?" );
                             
                     try:
                         while True:
-                            print ( p )
+                            print ( p );
                             
-                            print ( "Happy? Y/N?" )
-                            c = menu.c(sets.cArrow).lower()
+                            print ( "Happy? Y/N?" );
+                            c = menu.c(sets.cArrow).lower();
                             if c == "n" or c == "":
-                                p = pa.genStrongPass(l)
+                                p = pa.genStrongPass(l);
                             elif c == "y":
-                                break
+                                break;
                             else:
-                                print ( "What?" )
+                                print ( "What?" );
                                 
                     except KeyboardInterrupt:
-                        pass
+                        pass;
                     if c == "y":
                         while True:
-                            print ( "Add a comment to the password: ", p )
+                            print ( "Add a comment to the password:", p );
                             try:
-                                c = menu.c(sets.cArrow)
+                                c = menu.c(sets.cArrow);
                                 if c == "":
-                                    print ( "Are you sure you want to leave that blank?" )
-                                    c = menu.c(sets.cArrow).lower()
+                                    print ( "Are you sure you want to leave that blank?" );
+                                    c = menu.c(sets.cArrow).lower();
                                     if c == "y":
-                                        c = ""
-                                        break
+                                        c = "";
+                                        break;
                                     elif c == "n" or c == "":
-                                        pass
+                                        pass;
                                     else:
-                                        print ( "What?" )
+                                        print ( "What?" );
                                 else:
-                                    break
+                                    break;
                                 
                             except KeyboardInterrupt:
-                                pass
+                                pass;
 
-                        encPass.append([pa.textToCryArr(p.encode(sets.encoding),hhh),c])    
-                        break
+                        encPass.append([pa.textToCryArr(p.encode(sets.encoding),hhh),c]);   
+                        break;
                 except KeyboardInterrupt:
-                    pass
+                    pass;
 
         elif c == "3":
             #Some stuff here
-            pass
+            pass;
             
         elif c == "4": #Exit
-            break
+            break;
         else:
-            print ( "What?" )
+            print ( "What?" );
         
     except KeyboardInterrupt:
-        pass
+        pass;
 
